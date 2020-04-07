@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:humwell_signup/models/models.dart';
 import 'package:humwell_signup/ui/home.dart';
 import 'package:humwell_signup/ui/signup/signup.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AnswereModel(),
+      child: MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,8 +19,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xFF5DCCA8),
+        accentColor: Color(0xFF69ACDE),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        buttonTheme: ButtonThemeData(
+          disabledColor: Colors.blueAccent.withOpacity(0.3),
+        ),
+        textTheme: TextTheme(
+          
+        )
       ),
       initialRoute: HomePage.id,
       routes: {

@@ -31,9 +31,9 @@ class CustomButton extends StatelessWidget {
         widthFactor: 0.5,
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          padding: EdgeInsets.symmetric(vertical: padding_s, horizontal: padding_l),
           decoration: BoxDecoration(
-            color: disable? Colors.blueGrey.withOpacity(0.3) : Colors.green,
+            color: disable? buttonDisabledColor : Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(50.0)
           ),
           child: Stack(
@@ -53,7 +53,7 @@ class CustomButton extends StatelessWidget {
               : Align(
                   alignment: Alignment.centerRight,
                   child: Container(
-                    padding: EdgeInsets.all(2.0),
+                    padding: EdgeInsets.all(padding_xs),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(100.0)
@@ -61,7 +61,7 @@ class CustomButton extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 16.0,
-                      color: disable? Colors.blueGrey.withOpacity(0.3) : Colors.green,
+                      color: disable? buttonDisabledColor : Theme.of(context).primaryColor,
                     ),
                   ),
                 ),

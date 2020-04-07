@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
 import 'package:humwell_signup/ui/signup/bottom_bar.dart';
+import 'package:humwell_signup/ui/signup/dynamic_input.dart';
 
 class SignUp extends StatefulWidget {
   
@@ -57,74 +58,6 @@ class _SignUpState extends State<SignUp> {
 
         ],
       ),
-    );
-  }
-}
-
-class DynamicInput extends StatefulWidget {
-  final PageController pageController;
-  
-  const DynamicInput({
-    Key key, this.pageController,
-  }) : super(key: key);
-
-  @override
-  _DynamicInputState createState() => _DynamicInputState();
-}
-
-class _DynamicInputState extends State<DynamicInput> {
-  bool disableButton = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        
-        QuestionText(
-          text: "What is your name?",
-        ),
-
-        SizedBox(height: 32.0),
-        
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Container(
-            color: Colors.blueGrey.withOpacity(0.2),
-            child: TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-              onChanged: (value){
-                setState(() {
-                  disableButton = value == "";
-                });
-              },
-            ),
-          ),
-        ),
-
-        SizedBox(height: 32.0),
-
-        CustomButton(
-          text: "NEXT",
-          icon: Icons.arrow_forward_ios,
-          disable: disableButton,
-          onTap: (){
-            widget.pageController.animateToPage(
-              widget.pageController.page.round() + 1,
-              duration: Duration(milliseconds: 200), 
-              curve: Curves.easeIn,
-            );
-          },
-        ),
-      ],
     );
   }
 }
