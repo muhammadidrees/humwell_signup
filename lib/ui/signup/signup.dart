@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                     question: Question(
                       questionId: number,
                       questionText: "Question# ${number + 1}",
-                      questionType: QuestionType.numberInput,
+                      questionType: QuestionType.textInput,
                     ),
                   );
                 },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/models/models.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
+import 'package:humwell_signup/ui/signup/keyboard_input.dart';
 import 'package:provider/provider.dart';
 
 class DynamicInput extends StatefulWidget {
@@ -18,41 +19,36 @@ class DynamicInput extends StatefulWidget {
 
 class _DynamicInputState extends State<DynamicInput> {
 
-  // to endable or disable the button
+  /// enable button only when user has given or 
+  /// updated input
   bool disableButton = true;
-  TextEditingController _textEditingController;
+
+  /// to store the answer that user input
   List<String> answer = [];
 
-  // this is necessary else other wise user won't be able to re-edit
-  // the answer 
-  bool edit = false;
-
-  @override
-  void initState() {
-    _textEditingController = TextEditingController();
-    super.initState();
+  /// A call back function to be used to change 
+  /// disable state outside of the widget
+  void setDisableButton(bool value) {
+    setState(() {
+      disableButton = value;
+    });
   }
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
+  /// A call back function to be used to change 
+  /// edit state outside of the widget
+  void setAnswer(List<String> value) {
+    setState(() {  
+      answer = value;
+    });
+
+    print(answer);
+  } 
 
   @override
   Widget build(BuildContext context) {
 
-    List<Question> answers = Provider.of<AnswerModel>(context).questions;
-
-    // show answer to user only if user doesn't want to edit text 
-    // if we don't use if the answer will be fixed once user has given the answer
-    if (!edit) {
-      answers.forEach((element) { 
-        if (element == widget.question)
-          _textEditingController.text = element.answer[0];
-      });
-    }
-
+    /// if question answered before get previous answer
+    List<String> previousAnswer = Provider.of<AnswerModel>(context).getAnswer(widget.question);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,50 +61,32 @@ class _DynamicInputState extends State<DynamicInput> {
 
         SizedBox(height: size_xl),
         
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: padding_xl),
-          child: Container(
-            color: Colors.blueGrey.withOpacity(0.2),
-            child: TextField(
-              controller: _textEditingController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-              onTap: (){
-                setState(() {
-                  edit = true;
-                });
-              },
-              onChanged: (value){
-                setState(() {
-                  disableButton = value == "";
-                });
-              },
-            ),
-          ),
+        InputKeyboard(
+          type: widget.question.questionType,
+          setDisableButton: setDisableButton,
+          setAnswer: setAnswer,
+          answer: previousAnswer == null? null : previousAnswer[0],
         ),
 
         SizedBox(height: size_xl),
 
         CustomButton(
-          text: "NEXT",
-          icon: Icons.arrow_forward_ios,
+          text: previousAnswer == null? "NEXT" : "UPDATE",
+          icon: previousAnswer == null? Icons.arrow_forward_ios: Icons.refresh,
           disable: disableButton,
           onTap: (){
-            // get the answer value from the text controller
-            answer = [_textEditingController.text];
+            
+            // Hide keyboard
+            FocusScope.of(context).unfocus();
 
             // remove the answer if it already exists
             Provider.of<AnswerModel>(context).remove(widget.question);
 
             // add the answer to answer list
-            Provider.of<AnswerModel>(context).add(widget.question, answer);
-
+            if (answer != null){
+              print("this happend $answer");
+              Provider.of<AnswerModel>(context).add(widget.question, answer);
+            }
             // go to next page
             widget.pageController.animateToPage(
               widget.pageController.page.round() + 1,

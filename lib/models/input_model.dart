@@ -13,10 +13,9 @@ class AnswerModel extends ChangeNotifier {
   /// Adds a question with it's answer into list of answered 
   /// question and notifies to it's listeners
   void add(Question question, List<String> answer){ 
-
-    _answeredQuestions.add(
-      question.copyWith(answer: answer)
-    );
+      _answeredQuestions.add(
+        question.copyWith(answer: answer)
+      );
     
     notifyListeners();
   }
@@ -26,5 +25,16 @@ class AnswerModel extends ChangeNotifier {
     _answeredQuestions.remove(question);
 
     notifyListeners();
+  }
+
+  /// Check if the answer already exist in the list
+  List<String> getAnswer(Question question){
+    for (var answer in _answeredQuestions) {
+      if (answer == question) {
+        return answer.answer;
+      }
+    }
+
+    return null;
   } 
 }
