@@ -1,7 +1,7 @@
 part of 'models.dart';
 
 /// Representation of a question
-class Question{
+class Question extends Equatable{
   final int questionId;
   final String questionText;
   final QuestionType questionType;
@@ -21,6 +21,14 @@ class Question{
       questionType: this.questionType, 
       answer: answer,
     );
+  }
+
+  @override
+  List<Object> get props => [questionId];
+
+  @override
+  String toString() {
+    return "Question id: ${this.questionId}";
   }
 
 }

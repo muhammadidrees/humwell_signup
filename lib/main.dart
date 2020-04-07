@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => AnswereModel(),
+      create: (context) => AnswerModel(),
       child: MyApp()
     )
   );

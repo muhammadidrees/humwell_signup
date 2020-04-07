@@ -3,8 +3,9 @@ part of 'custom_widget.dart';
 class PageViewProgress extends StatelessWidget {
   const PageViewProgress({
     Key key,
-    @required this.maxPages, this.progress,
-  }) : super(key: key);
+    @required this.maxPages, double progress,
+  }) :  this.progress = progress?? 0.0,
+        super(key: key);
 
   final double progress;
   final int maxPages;

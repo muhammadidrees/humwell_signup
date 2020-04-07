@@ -1,6 +1,6 @@
 part of 'models.dart';
 
-class AnswereModel extends ChangeNotifier {
+class AnswerModel extends ChangeNotifier {
   /// to stored the list of questions that've been answered
   final List<Question> _answeredQuestions = [];
 
@@ -12,9 +12,19 @@ class AnswereModel extends ChangeNotifier {
 
   /// Adds a question with it's answer into list of answered 
   /// question and notifies to it's listeners
-  void add(Question question, List<String> answer){
+  void add(Question question, List<String> answer){ 
+
     _answeredQuestions.add(
       question.copyWith(answer: answer)
     );
+    
+    notifyListeners();
+  }
+
+  /// Removes question from answered list
+  void remove(Question question){ 
+    _answeredQuestions.remove(question);
+
+    notifyListeners();
   } 
 }
