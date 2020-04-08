@@ -5,13 +5,13 @@ class InputKeyboard extends StatefulWidget {
   const InputKeyboard({
     Key key, 
     @required this.type, 
-    this.setAnswer, 
-    this.setDisableButton, 
-    this.answer,
+    @required this.setAnswer,
+    @required this.answer,
   }) :  super(key: key);
 
+  /// Needed to specify weather to show a numeric or alphabetic keyboard
   final QuestionType type;
-  final Function setAnswer, setDisableButton;
+  final Function setAnswer;
   final String answer;
 
   @override
@@ -22,8 +22,8 @@ class _InputKeyboardState extends State<InputKeyboard> {
 
   TextEditingController _textEditingController;
 
-  // this is necessary else other wise user won't be able to re-edit
-  // the answer or can be shown the question with answer
+  /// this is necessary else other wise user won't be able to re-edit
+  /// the answer or can be shown the question with answer
   bool edit = false;
 
   @override
@@ -41,9 +41,9 @@ class _InputKeyboardState extends State<InputKeyboard> {
   @override
   Widget build(BuildContext context) {
 
-    /// Show answer unless edit mode is on this is necessary as
-    /// otherwise the answer will be showing regardless user keeps
-    /// editing the text field
+    // Show answer unless edit mode is on this is necessary as
+    // otherwise the answer will be showing regardless user keeps
+    // editing the text field
     if (!edit) {
       _textEditingController.text = widget.answer;
     }
@@ -69,12 +69,10 @@ class _InputKeyboardState extends State<InputKeyboard> {
                 edit = true;
               },
               onChanged: (value){
-                // _textEditingController.value = TextEditingValue(text: value);
                 if (value == "")
                   widget.setAnswer(null);
                 else
                   widget.setAnswer([_textEditingController.text]);
-                widget.setDisableButton(false);
               },
             ),
           ),
@@ -93,7 +91,6 @@ class _InputKeyboardState extends State<InputKeyboard> {
               onTap: (){
                 setState(() {
                   _textEditingController.text = "";
-                  widget.setDisableButton(false);
                   widget.setAnswer(null);
                   edit = true;
                 });
