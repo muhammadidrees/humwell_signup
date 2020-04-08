@@ -42,7 +42,6 @@ class _SignUpState extends State<SignUp> {
         }
         
         // if (page > maxPages - 2){
-          print("f = $forward");
 
         if (page <= maxPages - 2 ) {
           lastPage = false;
@@ -69,7 +68,6 @@ class _SignUpState extends State<SignUp> {
         //   print("down");
         // lastPage = _pageController.page < maxPages - 1;
         // }
-        print(lastPage);
       });
     });
 
@@ -94,7 +92,7 @@ class _SignUpState extends State<SignUp> {
                       questionId: number,
                       questionText: "Question# ${number + 1}",
                       questionType: QuestionType.textInput,
-                      options: ["option 1", "option 2", "option 3"]
+                      options: ["karachi", "hyderabad", "shahdadpur", "dadu", "sakkar", "shikarpur", "shahdadkot"]
                     ),
                   );
                 },

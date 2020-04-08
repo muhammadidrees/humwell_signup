@@ -4,6 +4,7 @@ import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/models/models.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
 import 'package:humwell_signup/ui/signup/keyboard_input.dart';
+import 'package:humwell_signup/ui/signup/multi_input.dart';
 import 'package:humwell_signup/ui/signup/radio_input.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class _DynamicInputState extends State<DynamicInput> {
     setState(() {  
       answer = value;
     });
-
+    print(answer);
     disableButton = false;
   } 
 
@@ -44,6 +45,8 @@ class _DynamicInputState extends State<DynamicInput> {
     /// check if the quesition was previously answered
     List<String> previousAnswer = Provider.of<AnswerModel>(context).getAnswer(widget.question);
 
+    print("S: $answer");
+    print("PA: $previousAnswer");
     // if new answer equal old answer disable button
     if (listEquals(answer, previousAnswer)) {
       disableButton = true;
@@ -71,10 +74,15 @@ class _DynamicInputState extends State<DynamicInput> {
           //   setAnswer: setAnswer,
           //   answer: previousAnswer == null? null : previousAnswer[0],
           // ),
-          child: RadioInput(
+          // child: RadioInput(
+          //   setAnswer: setAnswer,
+          //   options: widget.question.options,
+          //   answer: previousAnswer == null? null : previousAnswer[0],
+          // ),
+          child: MultiInput(
             setAnswer: setAnswer,
             options: widget.question.options,
-            answer: previousAnswer == null? null : previousAnswer[0],
+            answer: previousAnswer == null? [] : previousAnswer,
           ),
         ),
 
@@ -98,7 +106,6 @@ class _DynamicInputState extends State<DynamicInput> {
 
             // add new answer to answer list
             if (answer != null){
-              print("this happend $answer");
               Provider.of<AnswerModel>(context).add(widget.question, answer);
             }
 
