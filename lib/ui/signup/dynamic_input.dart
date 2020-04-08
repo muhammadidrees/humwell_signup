@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/models/models.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
 import 'package:humwell_signup/ui/signup/keyboard_input.dart';
+import 'package:humwell_signup/ui/signup/radio_input.dart';
 import 'package:provider/provider.dart';
 
 class DynamicInput extends StatefulWidget {
@@ -32,6 +34,7 @@ class _DynamicInputState extends State<DynamicInput> {
     setState(() {  
       answer = value;
     });
+
     disableButton = false;
   } 
 
@@ -41,9 +44,15 @@ class _DynamicInputState extends State<DynamicInput> {
     /// check if the quesition was previously answered
     List<String> previousAnswer = Provider.of<AnswerModel>(context).getAnswer(widget.question);
 
+    // if new answer equal old answer disable button
+    if (listEquals(answer, previousAnswer)) {
+      disableButton = true;
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         
         QuestionText(
@@ -51,15 +60,22 @@ class _DynamicInputState extends State<DynamicInput> {
         ),
 
         SizedBox(height: size_xl),
-        
-        /// Any input widget can be placed here all that needs to be manipulated is
-        /// the [setAnswer] call back that has to be called when the answer in that widget
-        /// is changed and [answer] to be displayed incase user has already answered
 
-        InputKeyboard(
-          type: widget.question.questionType,
-          setAnswer: setAnswer,
-          answer: previousAnswer == null? null : previousAnswer[0],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: padding_xl),
+          /// Any input widget can be placed here all that needs to be manipulated is
+          /// the [setAnswer] call back that has to be called when the answer in that widget
+          /// is changed and [answer] to be displayed incase user has already answered
+          // child: InputKeyboard(
+          //   type: widget.question.questionType,
+          //   setAnswer: setAnswer,
+          //   answer: previousAnswer == null? null : previousAnswer[0],
+          // ),
+          child: RadioInput(
+            setAnswer: setAnswer,
+            options: widget.question.options,
+            answer: previousAnswer == null? null : previousAnswer[0],
+          ),
         ),
 
         SizedBox(height: size_xl),

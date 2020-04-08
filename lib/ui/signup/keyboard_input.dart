@@ -48,56 +48,53 @@ class _InputKeyboardState extends State<InputKeyboard> {
       _textEditingController.text = widget.answer;
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: padding_xl),
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Container(
-            color: Colors.blueGrey.withOpacity(0.2),
-            child: TextField(
-              controller: _textEditingController,
-              keyboardType: widget.type == QuestionType.numberInput? TextInputType.number : TextInputType.text,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-              onTap: (){
-                edit = true;
-              },
-              onChanged: (value){
-                if (value == "")
-                  widget.setAnswer(null);
-                else
-                  widget.setAnswer([_textEditingController.text]);
-              },
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Container(
+          color: Colors.blueGrey.withOpacity(0.2),
+          child: TextField(
+            controller: _textEditingController,
+            keyboardType: widget.type == QuestionType.numberInput? TextInputType.number : TextInputType.text,
+            decoration: InputDecoration(
+              border: InputBorder.none,
             ),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+            onTap: (){
+              edit = true;
+            },
+            onChanged: (value){
+              if (value == "")
+                widget.setAnswer(null);
+              else
+                widget.setAnswer([_textEditingController.text]);
+            },
           ),
+        ),
 
-          if (widget.answer != null || _textEditingController.text != "")
-            GestureDetector(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(padding_s),
-                  child: Icon(
-                    Icons.close,
-                  ),
+        if (widget.answer != null || _textEditingController.text != "")
+          GestureDetector(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(padding_s),
+                child: Icon(
+                  Icons.close,
                 ),
               ),
-              onTap: (){
-                setState(() {
-                  _textEditingController.text = "";
-                  widget.setAnswer(null);
-                  edit = true;
-                });
-              }
-            )
-        ],
-      ),
+            ),
+            onTap: (){
+              setState(() {
+                _textEditingController.text = "";
+                widget.setAnswer(null);
+                edit = true;
+              });
+            }
+          )
+      ],
     );
   }
 }

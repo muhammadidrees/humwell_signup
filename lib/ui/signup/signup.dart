@@ -48,6 +48,7 @@ class _SignUpState extends State<SignUp> {
                       questionId: number,
                       questionText: "Question# ${number + 1}",
                       questionType: QuestionType.textInput,
+                      options: ["option 1", "option 2", "option 3"]
                     ),
                   );
                 },
