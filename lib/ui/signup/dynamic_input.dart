@@ -40,7 +40,37 @@ class _DynamicInputState extends State<DynamicInput> {
     });
     print(answer);
     disableButton = false;
-  } 
+  }
+
+  Widget inputWidget(Question question, List<String> previousAnswer){
+
+    switch (question.questionType) {
+      case QuestionType.textInput:
+      case QuestionType.numberInput:
+        return InputKeyboard(
+            type: widget.question.questionType,
+            setAnswer: setAnswer,
+            answer: previousAnswer == null? null : previousAnswer[0],
+          );
+        break;
+      case QuestionType.radioInput:
+        return RadioInput(
+          setAnswer: setAnswer,
+          options: widget.question.options,
+          answer: previousAnswer == null? null : previousAnswer[0],
+        );
+        break;
+      case QuestionType.multiInput:
+        return MultiInput(
+          setAnswer: setAnswer,
+          options: widget.question.options,
+          answer: previousAnswer == null? [] : previousAnswer,
+        );
+        break;
+      default:
+        return Container(); 
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,21 +102,7 @@ class _DynamicInputState extends State<DynamicInput> {
           /// Any input widget can be placed here all that needs to be manipulated is
           /// the [setAnswer] call back that has to be called when the answer in that widget
           /// is changed and [answer] to be displayed incase user has already answered
-          child: InputKeyboard(
-            type: widget.question.questionType,
-            setAnswer: setAnswer,
-            answer: previousAnswer == null? null : previousAnswer[0],
-          ),
-          // child: RadioInput(
-          //   setAnswer: setAnswer,
-          //   options: widget.question.options,
-          //   answer: previousAnswer == null? null : previousAnswer[0],
-          // ),
-          // child: MultiInput(
-          //   setAnswer: setAnswer,
-          //   options: widget.question.options,
-          //   answer: previousAnswer == null? [] : previousAnswer,
-          // ),
+          child: inputWidget(widget.question, previousAnswer),
         ),
 
         SizedBox(height: size_xl),

@@ -86,12 +86,14 @@ class _SignUpState extends State<SignUp> {
                 controller: _pageController,
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, number){
+                  int index = number % 4;
+                  List<QuestionType> type = [QuestionType.textInput, QuestionType.numberInput, QuestionType.multiInput, QuestionType.radioInput];
                   return DynamicInput(
                     pageController: _pageController,
                     question: Question(
                       questionId: number,
                       questionText: "Question# ${number + 1}",
-                      questionType: QuestionType.textInput,
+                      questionType: type[index],
                       options: ["karachi", "hyderabad", "shahdadpur", "dadu", "sakkar", "shikarpur", "shahdadkot"]
                     ),
                   );
@@ -99,7 +101,6 @@ class _SignUpState extends State<SignUp> {
               ),
 
               PageViewProgress(
-                // hasCleints make sure the pageview is properly build before accessing the page value
                 progress: answers.progress.toDouble(), 
                 maxPages: maxPages,
               ),
