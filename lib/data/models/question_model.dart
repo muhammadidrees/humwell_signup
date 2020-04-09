@@ -30,9 +30,44 @@ class Question extends Equatable{
   @override
   List<Object> get props => [questionId];
 
+  static List<Question> fromModel(List<QuestionModel> model){
+
+    return model.map((q) =>
+      Question(
+        questionId: q.id,
+        questionText: q.question,
+        questionType: toType(q.inputtype),
+        options: q.options == null? [] : q.options.map((e) => e.option).toList(),
+      )
+    ).toList();
+  }
+
+  static QuestionType toType(String type){
+    QuestionType qtype;
+    print(type.toLowerCase());
+    switch (type.toLowerCase()) {
+      case "textinput":
+        qtype = QuestionType.textInput;
+        break;
+      case "numberinput":
+        qtype = QuestionType.numberInput;
+        break;
+      case "radioinput":
+        qtype = QuestionType.radioInput;
+        break;
+      case "multiinput":
+        qtype = QuestionType.multiInput;
+        break;
+      default:
+        print("cannot find input type QUESTION class TOTYPE method"); 
+    }
+    return qtype;
+
+  }
+
   @override
   String toString() {
-    return "Question id: ${this.questionId}";
+    return "Question id: ${this.questionId}, text: ${this.questionText}, type: ${this.questionType}";
   }
 
 }

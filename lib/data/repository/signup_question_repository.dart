@@ -1,20 +1,20 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:humwell_signup/consts.dart';
-import 'package:humwell_signup/data/models/signup_model.dart';
+part of 'repository.dart';
 
 
 class SignUpRepository {
-  Future<Signup> get() async {
+  Future<List<Question>> get() async {
     var signupFile = await rootBundle.loadString(signupPath);
     Map<String, dynamic> signupJson = json.decode(signupFile);
     // var mainMenuSections = Signup.fromMap(signupJson);
     var signup = Signup.fromMap(signupJson);
 
-    print(signup.result.questions.toString());
+    List<Question> questions = Question.fromModel(signup.result.questions);
+    // for (var q in signup.result.questions) {
+    //   print(q.question);
+    // }
 
-    return signup;
+    print("Chay $questions");
+
+    return questions;
   }
 }

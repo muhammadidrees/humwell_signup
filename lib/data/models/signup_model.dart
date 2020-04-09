@@ -2,7 +2,7 @@
 //
 //     final signup = signupFromJson(jsonString);
 
-import 'dart:convert';
+part of 'models.dart';
 
 Signup signupFromJson(String str) => Signup.fromMap(json.decode(str));
 
@@ -56,24 +56,24 @@ class Result {
     });
 
     factory Result.fromMap(Map<String, dynamic> json) => Result(
-        questions: List<QuestionModel>.from(json["Questions"].map((x) => QuestionModel.fromMap(x))),
+        questions: List<QuestionModel>.from(json["questions"].map((x) => QuestionModel.fromMap(x))),
     );
 
     Map<String, dynamic> toMap() => {
-        "Questions": List<dynamic>.from(questions.map((x) => x.toMap())),
+        "questions": List<dynamic>.from(questions.map((x) => x.toMap())),
     };
 }
 
 class QuestionModel {
     int id;
-    String questions;
+    String question;
     String inputtype;
     bool active;
     List<Option> options;
 
     QuestionModel({
         this.id,
-        this.questions,
+        this.question,
         this.inputtype,
         this.active,
         this.options,
@@ -81,7 +81,7 @@ class QuestionModel {
 
     factory QuestionModel.fromMap(Map<String, dynamic> json) => QuestionModel(
         id: json["id"],
-        questions: json["questions"],
+        question: json["question"],
         inputtype: json["inputtype"],
         active: json["active"],
         options: json["options"] == null ? null : List<Option>.from(json["options"].map((x) => Option.fromMap(x))),
@@ -89,7 +89,7 @@ class QuestionModel {
 
     Map<String, dynamic> toMap() => {
         "id": id,
-        "questions": questions,
+        "question": question,
         "inputtype": inputtype,
         "active": active,
         "options": options == null ? null : List<dynamic>.from(options.map((x) => x.toMap())),

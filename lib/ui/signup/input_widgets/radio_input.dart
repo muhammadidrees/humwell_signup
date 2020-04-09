@@ -19,8 +19,9 @@ class _RadioInputState extends State<RadioInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: (widget.options.length * 60.0 > 240.0)? 290.0 : widget.options.length * 60.0,
+      height: (widget.options.length * 50.0 > 200.0)? 220.0 : widget.options.length * 50.0,
       child: ListView(
+        padding: EdgeInsets.all(0.0),
         addSemanticIndexes: true,
         shrinkWrap: true,
         dragStartBehavior: DragStartBehavior.start,

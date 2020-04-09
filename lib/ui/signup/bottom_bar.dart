@@ -22,19 +22,6 @@ class BottomBar extends StatelessWidget {
           alignment: Alignment.center,
           children: [
 
-            // go to home button
-            AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              alignment: lastPage? Alignment.centerRight : Alignment.centerLeft,
-              child: FlatButton.icon(
-                onPressed: (){
-                  Navigator.of(context).popUntil(ModalRoute.withName(HomePage.id));
-                }, 
-                icon: Icon(Icons.home), 
-                label: Text("Home"),
-              ),
-            ),
-
             // go next page button
             AnimatedOpacity(
               duration: Duration(milliseconds: 200),
@@ -52,6 +39,19 @@ class BottomBar extends StatelessWidget {
                   icon: Text("Skip"), 
                   label: Icon(Icons.arrow_forward_ios),
                 ),
+              ),
+            ),
+
+            // go to home page button
+            AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              alignment: lastPage? Alignment.centerRight : Alignment.centerLeft,
+              child: FlatButton.icon(
+                onPressed: (){
+                  Navigator.of(context).popUntil(ModalRoute.withName(HomePage.id));
+                }, 
+                icon: Icon(Icons.home), 
+                label: Text("Home"),
               ),
             )
           ],

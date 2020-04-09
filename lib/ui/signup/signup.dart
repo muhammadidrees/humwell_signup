@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/data/models/models.dart';
+import 'package:humwell_signup/data/repository/repository.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
 import 'package:humwell_signup/ui/signup/bottom_bar.dart';
 import 'package:humwell_signup/ui/signup/dynamic_input.dart';
@@ -19,16 +20,23 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   PageController _pageController;
-  
+  SignUpRepository repo = SignUpRepository();
+  Future<List<Question>> questions;
+    
   // max number of pages to be displayed
-  int maxPages = 5;
+  int maxPages = 1;
   bool lastPage = false;
   bool forward = true;
-  bool backward = true;
 
   @override
   void initState() {
     _pageController = PageController(initialPage: 0);
+    questions = repo.get();
+
+    questions.then((value) {
+      maxPages = value.length;
+      return null;
+    });
     
     _pageController.addListener(() {
       setState(() {
@@ -81,23 +89,37 @@ class _SignUpState extends State<SignUp> {
         builder: (context, answers, child) {
           return Stack(
             children: <Widget>[
-              PageView.builder(
-                itemCount: maxPages,
-                controller: _pageController,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, number){
-                  int index = number % 4;
-                  List<QuestionType> type = [QuestionType.textInput, QuestionType.numberInput, QuestionType.multiInput, QuestionType.radioInput];
-                  return DynamicInput(
-                    pageController: _pageController,
-                    question: Question(
-                      questionId: number,
-                      questionText: "Question# ${number + 1}",
-                      questionType: type[index],
-                      options: ["karachi", "hyderabad", "shahdadpur", "dadu", "sakkar", "shikarpur", "shahdadkot"]
-                    ),
-                  );
-                },
+
+              FutureBuilder<List<Question>>(
+                future: questions,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData){
+                    return PageView.builder(
+                      itemCount: maxPages,
+                      controller: _pageController,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, number){
+                        return DynamicInput(
+                          pageController: _pageController,
+                          question: Question(
+                            questionId: snapshot.data[number].questionId,
+                            // questionId: number,
+                            // questionText: "Question# ${number + 1}",
+                            questionText: snapshot.data[number].questionText,
+                            questionType: snapshot.data[number].questionType,
+                            // questionType: QuestionType.textInput,
+                            // options: ["karachi", "hyderabad", "shahdadpur", "dadu", "sakkar", "shikarpur", "shahdadkot"]
+                            options: snapshot.data[number].options,
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }
               ),
 
               PageViewProgress(
