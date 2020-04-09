@@ -20,7 +20,7 @@ class _RadioInputState extends State<RadioInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: (widget.options.length * 60.0 > 180)? 190 : widget.options.length * 60.0,
+      height: (widget.options.length * 60.0 > 240.0)? 290.0 : widget.options.length * 60.0,
       child: ListView(
         addSemanticIndexes: true,
         shrinkWrap: true,
@@ -40,7 +40,7 @@ class _RadioInputState extends State<RadioInput> {
                   edit = true;
                   editedValue = value;
                 });
-                widget.setAnswer(value == null? null : [value.toString()]);
+                widget.setAnswer(value == null? <String>[] : [value.toString()]);
               },
             )
         ],

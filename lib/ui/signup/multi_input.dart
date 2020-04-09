@@ -22,7 +22,10 @@ class _MultiInputState extends State<MultiInput> {
     List<Widget> choices = List();
     
     if (!edit) {
-      selectedChoices.addAll(widget.answer);
+      selectedChoices = List();
+      for (var answer in widget.answer){
+        selectedChoices.add(answer);
+      }
     }
     widget.options.forEach((item) {
       choices.add(Container(
@@ -42,7 +45,7 @@ class _MultiInputState extends State<MultiInput> {
               selectedChoices.contains(item)
                     ? selectedChoices.remove(item)
                     : selectedChoices.add(item);
-              widget.setAnswer((selectedChoices.isEmpty)? null : selectedChoices);
+              widget.setAnswer(selectedChoices);
             });
           },
         ),

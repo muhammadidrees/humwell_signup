@@ -33,7 +33,10 @@ class _DynamicInputState extends State<DynamicInput> {
   /// edit state outside of the widget
   void setAnswer(List<String> value) {
     setState(() {  
-      answer = value;
+      answer = [];
+      for (var ans in value){
+        answer.add(ans);
+      }
     });
     print(answer);
     disableButton = false;
@@ -69,21 +72,21 @@ class _DynamicInputState extends State<DynamicInput> {
           /// Any input widget can be placed here all that needs to be manipulated is
           /// the [setAnswer] call back that has to be called when the answer in that widget
           /// is changed and [answer] to be displayed incase user has already answered
-          // child: InputKeyboard(
-          //   type: widget.question.questionType,
-          //   setAnswer: setAnswer,
-          //   answer: previousAnswer == null? null : previousAnswer[0],
-          // ),
+          child: InputKeyboard(
+            type: widget.question.questionType,
+            setAnswer: setAnswer,
+            answer: previousAnswer == null? null : previousAnswer[0],
+          ),
           // child: RadioInput(
           //   setAnswer: setAnswer,
           //   options: widget.question.options,
           //   answer: previousAnswer == null? null : previousAnswer[0],
           // ),
-          child: MultiInput(
-            setAnswer: setAnswer,
-            options: widget.question.options,
-            answer: previousAnswer == null? [] : previousAnswer,
-          ),
+          // child: MultiInput(
+          //   setAnswer: setAnswer,
+          //   options: widget.question.options,
+          //   answer: previousAnswer == null? [] : previousAnswer,
+          // ),
         ),
 
         SizedBox(height: size_xl),
@@ -105,7 +108,7 @@ class _DynamicInputState extends State<DynamicInput> {
             Provider.of<AnswerModel>(context).remove(widget.question);
 
             // add new answer to answer list
-            if (answer != null){
+            if (answer.isNotEmpty){
               Provider.of<AnswerModel>(context).add(widget.question, answer);
             }
 

@@ -68,7 +68,7 @@ class _InputKeyboardState extends State<InputKeyboard> {
             },
             onChanged: (value){
               if (value == "")
-                widget.setAnswer(null);
+                widget.setAnswer(<String>[]);
               else
                 widget.setAnswer([_textEditingController.text]);
             },
@@ -89,7 +89,7 @@ class _InputKeyboardState extends State<InputKeyboard> {
             onTap: (){
               setState(() {
                 _textEditingController.text = "";
-                widget.setAnswer(null);
+                widget.setAnswer(<String>[]);
                 edit = true;
               });
             }
