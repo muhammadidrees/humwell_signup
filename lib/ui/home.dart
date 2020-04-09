@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:humwell_signup/data/repository/signup_question_repository.dart';
 import 'package:humwell_signup/ui/signup/signup.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,6 +14,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SignUpRepository repo = SignUpRepository();
+
+    repo.get();
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(

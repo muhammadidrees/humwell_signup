@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:humwell_signup/consts.dart';
-import 'package:humwell_signup/models/models.dart';
+import 'package:humwell_signup/data/models/models.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
 import 'package:humwell_signup/ui/signup/bottom_bar.dart';
 import 'package:humwell_signup/ui/signup/dynamic_input.dart';

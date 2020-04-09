@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:humwell_signup/consts.dart';
+part of 'input_widget.dart';
 
 class InputKeyboard extends StatefulWidget {
   const InputKeyboard({

@@ -1,0 +1,58 @@
+{
+    "response": {
+      "response_id": 0,
+      "response_desc": "Success"
+    },
+    "result": {
+      "Questions": [
+        {
+          "id": 1,
+          "questions": "What is your gender?",
+          "inputtype": "radioInput",
+          "active": true,
+          "options": [
+            {
+              "id": 1,
+              "option": "male",
+              "active": true
+            },
+            {
+              "id": 1,
+              "option": "female",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "questions": "Which deseases did you have?",
+          "inputtype": "multiInput",
+          "active": true,
+          "options": [
+            {
+              "id": 1,
+              "option": "diabaties",
+              "active": true
+            },
+            {
+              "id": 1,
+              "option": "high blood pressure",
+              "active": true
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "questions": "What is your height?",
+          "inputtype": "numberInput",
+          "active": true
+        },
+        {
+          "id": 4,
+          "questions": "What type of food do you eat?",
+          "inputtype": "textInput",
+          "active": true
+        }
+      ]
+    }
+  }

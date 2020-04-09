@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:humwell_signup/consts.dart';
-import 'package:humwell_signup/models/models.dart';
+import 'package:humwell_signup/data/models/models.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
-import 'package:humwell_signup/ui/signup/keyboard_input.dart';
-import 'package:humwell_signup/ui/signup/multi_input.dart';
-import 'package:humwell_signup/ui/signup/radio_input.dart';
+import 'package:humwell_signup/ui/signup/input_widgets/input_widget.dart';
 import 'package:provider/provider.dart';
 
 class DynamicInput extends StatefulWidget {
@@ -42,6 +40,7 @@ class _DynamicInputState extends State<DynamicInput> {
     disableButton = false;
   }
 
+  //
   Widget inputWidget(Question question, List<String> previousAnswer){
 
     switch (question.questionType) {

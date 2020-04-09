@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:humwell_signup/models/models.dart';
+import 'package:humwell_signup/data/models/models.dart';
 import 'package:humwell_signup/ui/home.dart';
 import 'package:humwell_signup/ui/signup/signup.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:humwell_signup/consts.dart';
+part of 'input_widget.dart';
 
 class MultiInput extends StatefulWidget {
   MultiInput({Key key, this.options, this.answer, this.setAnswer}) : super(key: key);

@@ -1,5 +1,4 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+part of 'input_widget.dart';
 
 class RadioInput extends StatefulWidget {
   RadioInput({Key key, this.options, this.answer, this.setAnswer}) : super(key: key);
