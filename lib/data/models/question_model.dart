@@ -37,9 +37,11 @@ class Question extends Equatable{
         questionId: q.id,
         questionText: q.question,
         questionType: toType(q.inputtype),
-        options: q.options == null? [] : q.options.map((e) => e.option).toList(),
+        options: q.options == null? [] 
+          : q.options.where((e) => e.active)
+            .map<String>((e) => e.option).toList()
       )
-    ).toList();
+    ).toList()?? <Question>[];
   }
 
   static QuestionType toType(String type){

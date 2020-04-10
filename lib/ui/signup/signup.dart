@@ -111,7 +111,9 @@ class _SignUpState extends State<SignUp> {
               FutureBuilder<List<Question>>(
                 future: questions,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData){
+                  print(snapshot.data);
+                  if (snapshot.hasData && snapshot.data.isNotEmpty){
+                    
                     return PageView.builder(
                       itemCount: maxPages,
                       controller: _pageController,
@@ -131,6 +133,17 @@ class _SignUpState extends State<SignUp> {
                           ),
                         );
                       },
+                    );
+                  } if (snapshot.hasData && snapshot.data.isEmpty){ 
+                    
+                    /// in case data recieved is empty
+                    print("FutureBuilder in signup widget didn't recieve any data");
+                    
+                    return Center(
+                      child: Text(
+                        "Sorry! An error occured unable to load page.",
+                        textAlign: TextAlign.center,
+                      ),
                     );
                   } else {
                     return Center(
