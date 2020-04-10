@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/data/models/models.dart';
 import 'package:humwell_signup/data/repository/repository.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
@@ -49,24 +48,26 @@ class _SignUpState extends State<SignUp> {
 
     _pageController.addListener(() {
       setState(() {
-        double page = _pageController.page;
-        if (page == maxPages - 1) {
-          forward = true;
-        }
+        // // right block
+        // double page = _pageController.page;
+        // if (page == maxPages - 1) {
+        //   forward = true;
+        // }
 
-        if (page == maxPages - 2) {
-          forward = false;
-        }
+        // if (page == maxPages - 2) {
+        //   forward = false;
+        // }
         
-        // if (page > maxPages - 2){
+        // // if (page > maxPages - 2){
 
-        if (page <= maxPages - 2 ) {
-          lastPage = false;
-        } else if (forward && page != maxPages - 1 && page > maxPages - 2) {
-          lastPage = false;
-        } else {
-          lastPage = true;
-        }
+        // if (page <= maxPages - 2 ) {
+        //   lastPage = false;
+        // } else if (forward && page != maxPages - 1 && page > maxPages - 2) {
+        //   lastPage = false;
+        // } else {
+        //   lastPage = true;
+        // }
+        // // end of right block
         
         //   if (forward && !backward){
         //     lastPage = false;
@@ -114,13 +115,13 @@ class _SignUpState extends State<SignUp> {
                 future: questions,
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data.isNotEmpty){
-                    
                     return PageView.builder(
                       itemCount: maxPages,
                       controller: _pageController,
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, number){
                         return DynamicInput(
+                          maxPages: maxPages,
                           pageController: _pageController,
                           question: Question(
                             questionId: snapshot.data[number].questionId,
@@ -163,7 +164,7 @@ class _SignUpState extends State<SignUp> {
               // bottom buttons
               BottomBar(
                 pageController: _pageController,
-                lastPage: lastPage,
+                maxPages: maxPages,
               ),
 
             ],

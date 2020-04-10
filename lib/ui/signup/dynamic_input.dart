@@ -4,14 +4,16 @@ import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/data/models/models.dart';
 import 'package:humwell_signup/ui/custom_widgets/custom_widget.dart';
 import 'package:humwell_signup/ui/signup/input_widgets/input_widget.dart';
+import 'package:humwell_signup/ui/signup/last_page.dart';
 import 'package:provider/provider.dart';
 
 class DynamicInput extends StatefulWidget {
   final PageController pageController;
   final Question question;
+  final int maxPages;
   
   const DynamicInput({
-    Key key, this.pageController, this.question,
+    Key key, this.pageController, this.question, this.maxPages,
   }) : super(key: key);
 
   @override
@@ -133,11 +135,16 @@ class _DynamicInputState extends State<DynamicInput> {
             // if answer question was previously answered meaning update state
             // stay on the same page else in next state go to next page
             if (previousAnswer == null) {
-              widget.pageController.animateToPage(
-                widget.pageController.page.round() + 1,
-                duration: Duration(milliseconds: 200), 
-                curve: Curves.easeIn,
-              );
+
+              if(widget.pageController.page.round() >= widget.maxPages - 1 && widget.maxPages - 1 > 0){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LastPage(maxPages: widget.maxPages)));
+              } else {
+                widget.pageController.animateToPage(
+                  widget.pageController.page.round() + 1,
+                  duration: Duration(milliseconds: 200), 
+                  curve: Curves.easeIn,
+                );
+              }
             }
           },
         ),

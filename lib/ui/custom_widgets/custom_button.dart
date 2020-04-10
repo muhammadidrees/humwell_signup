@@ -61,7 +61,7 @@ class CustomButton extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 16.0,
-                      color: disable? buttonDisabledColor : Theme.of(context).primaryColor,
+                      color: disable? buttonDisabledColor : Theme.of(context).accentColor,
                     ),
                   ),
                 ),
