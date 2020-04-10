@@ -99,7 +99,8 @@ class _SignUpState extends State<SignUp> {
         builder: (context, answers, child) {
           return Stack(
             children: <Widget>[
-
+              
+              // backgroud image
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
@@ -108,10 +109,10 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
+              // sign up form
               FutureBuilder<List<Question>>(
                 future: questions,
                 builder: (context, snapshot) {
-                  print(snapshot.data);
                   if (snapshot.hasData && snapshot.data.isNotEmpty){
                     
                     return PageView.builder(
@@ -153,11 +154,13 @@ class _SignUpState extends State<SignUp> {
                 }
               ),
 
+              // progress bar on top
               PageViewProgress(
                 progress: answers.progress.toDouble(), 
                 maxPages: maxPages,
               ),
 
+              // bottom buttons
               BottomBar(
                 pageController: _pageController,
                 lastPage: lastPage,
