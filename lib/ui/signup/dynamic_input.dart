@@ -36,11 +36,14 @@ class _DynamicInputState extends State<DynamicInput> {
         answer.add(ans);
       }
     });
-    print(answer);
+    // print(answer);
+
     disableButton = false;
   }
 
-  //
+  /// Any input widget can be placed here all that needs to be manipulated is
+  /// the [setAnswer] call back that has to be called when the answer in that widget
+  /// is changed and [answer] to be displayed incase user has already answered
   Widget inputWidget(Question question, List<String> previousAnswer){
 
     switch (question.questionType) {
@@ -77,10 +80,13 @@ class _DynamicInputState extends State<DynamicInput> {
     /// check if the quesition was previously answered
     List<String> previousAnswer = Provider.of<AnswerModel>(context).getAnswer(widget.question);
 
-    print("S: $answer");
-    print("PA: $previousAnswer");
+
+    // print("S: $answer");
+    // print("PA: $previousAnswer");
+
     // if new answer equal old answer disable button
-    if (listEquals(answer, previousAnswer)) {
+    // or when input is empty
+    if (listEquals(answer, previousAnswer) || (previousAnswer == null && answer.isEmpty)) {
       disableButton = true;
     }
 
@@ -98,9 +104,6 @@ class _DynamicInputState extends State<DynamicInput> {
 
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: padding_xl),
-          /// Any input widget can be placed here all that needs to be manipulated is
-          /// the [setAnswer] call back that has to be called when the answer in that widget
-          /// is changed and [answer] to be displayed incase user has already answered
           child: inputWidget(widget.question, previousAnswer),
         ),
 

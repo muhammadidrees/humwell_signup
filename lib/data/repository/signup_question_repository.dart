@@ -13,7 +13,7 @@ class SignUpRepository {
     //   print(q.question);
     // }
 
-    print("Chay $questions");
+    // print("Chay $questions");
 
     return questions;
   }

@@ -44,7 +44,6 @@ class Question extends Equatable{
 
   static QuestionType toType(String type){
     QuestionType qtype;
-    print(type.toLowerCase());
     switch (type.toLowerCase()) {
       case "textinput":
         qtype = QuestionType.textInput;

@@ -25,6 +25,9 @@ class _InputKeyboardState extends State<InputKeyboard> {
   /// the answer or can be shown the question with answer
   bool edit = false;
 
+  /// To specify decimal only input
+  RegExInputFormatter _amountValidator = RegExInputFormatter.withRegex('^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
+
   @override
   void initState() {
     _textEditingController = TextEditingController(text: "");
@@ -51,10 +54,11 @@ class _InputKeyboardState extends State<InputKeyboard> {
       alignment: Alignment.center,
       children: <Widget>[
         Container(
-          color: Colors.blueGrey.withOpacity(0.2),
+          color: Colors.blueGrey[100],
           child: TextField(
             controller: _textEditingController,
             keyboardType: widget.type == QuestionType.numberInput? TextInputType.number : TextInputType.text,
+            inputFormatters: widget.type == QuestionType.numberInput? [_amountValidator] : null,
             decoration: InputDecoration(
               border: InputBorder.none,
             ),

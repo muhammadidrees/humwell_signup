@@ -35,9 +35,18 @@ class _SignUpState extends State<SignUp> {
 
     questions.then((value) {
       maxPages = value.length;
+      // print("max: $maxPages");
+
+      // if there is only page no need to show skip button
+      // only show home button
+      if (maxPages == 1) {
+        setState(() {
+          lastPage = true;
+        });
+      }
       return null;
     });
-    
+
     _pageController.addListener(() {
       setState(() {
         double page = _pageController.page;
@@ -58,6 +67,7 @@ class _SignUpState extends State<SignUp> {
         } else {
           lastPage = true;
         }
+        
         //   if (forward && !backward){
         //     lastPage = false;
         //     print("this");
@@ -89,6 +99,14 @@ class _SignUpState extends State<SignUp> {
         builder: (context, answers, child) {
           return Stack(
             children: <Widget>[
+
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Image.asset(
+                  "assets/images/signup_background.png",
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
 
               FutureBuilder<List<Question>>(
                 future: questions,

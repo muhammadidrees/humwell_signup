@@ -14,10 +14,12 @@ class PageViewProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: padding_xl, right: padding_xl, bottom: padding_xl, top: padding_xxl),
-      child: LinearProgressIndicator(
+      child: GradientProgressIndicator(
         value: progress / maxPages,
-        backgroundColor: Colors.blueGrey.withOpacity(0.2),
-        valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
+        backgroundColor: Colors.white70,
+        gradient: LinearGradient(
+          colors: signupProgressGradient,
+        ),
       ),
     );
   }

@@ -8,6 +8,10 @@ enum QuestionType{
 }
 
 Color buttonDisabledColor = Colors.blueGrey.withOpacity(0.3);
+List<Color> signupProgressGradient = [
+  Color(0xFF69ADDF),
+  Color(0xFF5DCCA8),
+];
 
 const size_xs = 4.0;
 const size_s = 8.0;

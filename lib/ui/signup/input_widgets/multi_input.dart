@@ -37,7 +37,7 @@ class _MultiInputState extends State<MultiInput> {
             fontSize: 16.0,
           ),
           selected: edit? selectedChoices.contains(item) : widget.answer.contains(item),
-          backgroundColor: Colors.blueGrey.withOpacity(0.1),
+          backgroundColor: Colors.black12,
           onSelected: (selected) {
             setState(() {
               edit = true;

@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF5DCCA8),
         accentColor: Color(0xFF69ACDE),
+        scaffoldBackgroundColor: Color(0xFFEAEAEA),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         buttonTheme: ButtonThemeData(
           disabledColor: Colors.blueAccent.withOpacity(0.3),
