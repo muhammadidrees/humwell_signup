@@ -21,6 +21,7 @@ class _SignUpState extends State<SignUp> {
   PageController _pageController;
   SignUpRepository repo = SignUpRepository();
   Future<List<Question>> questions;
+  List<Question> listQuestions;
     
   // max number of pages to be displayed
   int maxPages = 1;
@@ -33,16 +34,22 @@ class _SignUpState extends State<SignUp> {
     questions = repo.get();
 
     questions.then((value) {
-      maxPages = value.length;
+      setState(() {
+        listQuestions = value;
+        maxPages = value.length;
+
+        if (maxPages == 1) {
+          setState(() {
+            lastPage = true;
+          });
+        }
+      
+      });
       // print("max: $maxPages");
 
       // if there is only page no need to show skip button
       // only show home button
-      if (maxPages == 1) {
-        setState(() {
-          lastPage = true;
-        });
-      }
+      
       return null;
     });
 
@@ -165,6 +172,7 @@ class _SignUpState extends State<SignUp> {
               BottomBar(
                 pageController: _pageController,
                 maxPages: maxPages,
+                quesiton: listQuestions,
               ),
 
             ],
