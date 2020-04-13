@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:humwell_signup/consts.dart';
 import 'package:humwell_signup/data/models/models.dart';
 import 'package:humwell_signup/ui/home.dart';
 import 'package:humwell_signup/ui/signup/last_page.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
@@ -55,8 +55,8 @@ class _BottomBarState extends State<BottomBar> {
                 Hero(
                   tag: "question_$i",
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    margin: ((widget._pageController.page?? 0) == i)? 
+                    duration: Duration(milliseconds: 100),
+                    margin: ((widget._pageController.page == null? 0 : widget._pageController.page.round()) == i)? 
                           EdgeInsets.only(bottom: padding_xl) : 
                           EdgeInsets.only(bottom: 0.0),
                     padding: EdgeInsets.symmetric(horizontal: padding_xs),
@@ -94,8 +94,6 @@ class _BottomBarState extends State<BottomBar> {
                     alignment: Alignment.centerRight,
                     child: FlatButton.icon(
                       onPressed: (){
-                        print(widget._pageController.page.round());
-                        print(widget.maxPages - 1);
                         if(widget._pageController.page.round() >= widget.maxPages - 1 && widget.maxPages - 1 > 0){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => LastPage(maxPages: widget.maxPages)));
                         } else {
