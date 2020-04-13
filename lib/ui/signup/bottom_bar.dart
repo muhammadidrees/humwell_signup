@@ -48,35 +48,38 @@ class _BottomBarState extends State<BottomBar> {
 
 
           !keyboardShowing?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              for (int i = 0; i < widget.maxPages; i++)
-                Hero(
-                  tag: "question_$i",
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 100),
-                    margin: ((widget._pageController.page == null? 0 : widget._pageController.page.round()) == i)? 
-                          EdgeInsets.only(bottom: padding_xl) : 
-                          EdgeInsets.only(bottom: 0.0),
-                    padding: EdgeInsets.symmetric(horizontal: padding_xs),
-                    child: GestureDetector(
-                      child: Icon(
-                        Provider.of<AnswerModel>(context).getAnswer(widget.quesiton[i]) != null?
-                            Icons.check_circle : 
-                            Icons.do_not_disturb_on,
-                        color: Provider.of<AnswerModel>(context).getAnswer(widget.quesiton[i]) != null?
-                              Theme.of(context).accentColor : 
-                              buttonDisabledColor,
-                        size: 16.0,
-                      ),
-                      onTap: (){
-                        widget._pageController.jumpToPage(i);
-                      },
-                    )
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                for (int i = 0; i < widget.maxPages; i++)
+                  Hero(
+                    tag: "question_$i",
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 100),
+                      margin: ((widget._pageController.page == null? 0 : widget._pageController.page.round()) == i)? 
+                            EdgeInsets.only(bottom: padding_xl) : 
+                            EdgeInsets.only(bottom: 0.0),
+                      padding: EdgeInsets.symmetric(horizontal: padding_xs),
+                      child: GestureDetector(
+                        child: Icon(
+                          Provider.of<AnswerModel>(context).getAnswer(widget.quesiton[i]) != null?
+                              Icons.check_circle : 
+                              Icons.do_not_disturb_on,
+                          color: Provider.of<AnswerModel>(context).getAnswer(widget.quesiton[i]) != null?
+                                Theme.of(context).accentColor : 
+                                buttonDisabledColor,
+                          size: 16.0,
+                        ),
+                        onTap: (){
+                          widget._pageController.jumpToPage(i);
+                        },
+                      )
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ) : Container(),
 
           Container(
